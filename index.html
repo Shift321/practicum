@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather</title>
+    <script crossorigin src='https://unpkg.com/react@17/umd/react.development.js'></script>
+    <script crossorigin src='https://unpkg.com/react-dom@17/umd/react-dom.development.js'></script>
+    <script src='https://unpkg.com/@babel/standalone/babel.min.js'></script>
+</head>
+<body>
+    <div id='root'></div>
+    <script type='text/babel'>
+        class Weather extends React.Component{
+            render() {
+                let typeOfWeather = {
+                    'осадки в виде снега':'icons/snow.png',
+                    'дождливо':'icons/rain.png',
+                    'солнечно с облаками':'icons/sun_with_cloud.png',
+                    'облачно':'icons/cloud.png'
+                }
+                let dayTime = {
+                    'солнечно с облаками Утром':'url("icons/morning.jpg")',
+                    'дождливо Днем':'url("icons/day.jpg")',
+                    'облачно Вечером':'url("icons/evening.jpg")',
+                    'осадки в виде снега Ночью':'url("icons/night.jpg")'
+                }
+                let cardStyle = {
+                    'margin':'1rem',
+                    'borderRadius':'5px',
+                    'width':'400px',
+                    'height':'400px',
+                    'backgroundImage':`${dayTime[this.props.typeOfWeather + ' ' + this.props.name]}`,
+                    'backgroundSize':'cover',
+                    'display':'inline',
+                    'aligItems':'center',
+                    'float':'left',
+                    'textAlign':'center',
+                    'fontFamily':'Tahoma'
+
+                }
+                let styleOfTime = {
+                    'marginTop': '0px',
+                    'fontSize':'30px',
+                    'color':'#black'
+                }
+                let fontStyle = {
+                    'marginTop':'103px',
+                    'fontSize':'30px',
+                    'color':'#black',
+                }
+                return(
+                    <div style={cardStyle}>
+                        <div style={styleOfTime}>
+                            <div>{this.props.name}</div>
+                            
+                            <div style={fontStyle}>{this.props.temperature} °C </div>
+                        </div>
+                        <div style={fontStyle}>
+                            <img width='80px' src={typeOfWeather[this.props.typeOfWeather]} />
+                        <div/>
+                        {this.props.typeOfWeather}
+                        </div>
+                    </div>
+                )
+            }
+        }
+            ReactDOM.render(
+            <div>
+                <Weather name='Утром' temperature='20' typeOfWeather='солнечно с облаками'/>
+                <Weather name='Днем' temperature='10' typeOfWeather='дождливо'/>
+                <Weather name='Вечером' temperature='5' typeOfWeather='облачно'/>
+                <Weather name='Ночью' temperature='-10' typeOfWeather='осадки в виде снега'/>
+            </div>,
+            document.getElementById('root')
+            )
+    </script>
+</body>
+</html>
